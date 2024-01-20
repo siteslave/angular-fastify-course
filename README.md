@@ -14,10 +14,10 @@
 - Project structure
 - `Tailwind` and `daisyUI` integration
 - Using `daisyUI` themes
-- Add font/assets
+- Add font
 - Data binding and Event
-- Routing, Pages and Layout
-- Query/Link params (Static/Dynamic)
+- Pages, Routing and Layout
+- Query/Link parameters (Static/Dynamic)
 - Create custom components
 - Control flow (`@if`, `@for`, `@switch`)
 - Pipe
