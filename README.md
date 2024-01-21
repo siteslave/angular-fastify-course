@@ -19,9 +19,8 @@
 - Pages, Routing and Layout
 - Query/Link parameters (Static/Dynamic)
 - Create custom components
-- Control flow (`@if`, `@for`, `@switch`)
+- Control flow (`@for`, `@if`)
 - Pipe
-- Style/Class
 ## Form
 - Create `daisyUI` form
 - Reactive Form/Form Group (Input/Checkbox/Radio/Select)
