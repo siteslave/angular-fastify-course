@@ -34,12 +34,12 @@
 
 ## Http Service
 
--   Using `DummyJSON`
+-   Using `DummyJSON` (https://dummyjson.com/)
 -   `Insomnia` REST client (basic CRUD pattern and Authen)
 -   Using HTTP Client service
--   Authentication interceptors
 -   `GET`/`POST`/`PUT`/`DELETE` method
 -   Pagination
+-   Login/AuthGuard (JWT token)
 -   Deployment (Docker/GitLab)
 
 # Fastify
