@@ -108,6 +108,31 @@ file `register-user-form.component.html`
 </form>
 ```
 
+## Use component
+
+file `register.component.ts`
+
+```typescript
+@Component({
+    // ...
+    imports: [RegisterUserFormComponent],
+    // ...
+})
+```
+
+file `register.component.html`
+
+```html
+<div class="card bg-base-100 shadow-xl">
+	<div class="card-body">
+		<h2 class="card-title">ลงทะเบียนสมาชิก</h2>
+		<p>กรุณากรอกข้อมูลสมาชิกรายใหม่</p>
+
+		<app-register-user-form />
+	</div>
+</div>
+```
+
 ### Check form valid
 
 ```html
@@ -129,13 +154,13 @@ if (!registerForm.valid) {
 file `register-user-form.component.html`
 
 ```html
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()"></form>
+<form [formGroup]="registerForm" (ngSubmit)="submitForm()"></form>
 ```
 
 file `register-user-form.component.ts`
 
 ```typescript
-onSubmit() {
+submitForm() {
     console.log(this.registerForm.value);
 }
 ```
@@ -171,5 +196,33 @@ file `register-user-form.component.html`
 <div class="label">
 	<span class="label-text-alt text-error"> กรุณาระบุอีเมล์ให้ถูกต้อง </span>
 </div>
+}
+```
+
+## Add output (event)
+
+file `register-user-form.component.ts`
+
+```typescript
+@Output() onSubmit: EventEmitter<any> = new EventEmitter<any>();
+//...
+submitForm() {
+    if (this.registerForm.valid) {
+        this.onSubmit.emit(this.registerForm.value);
+    }
+}
+```
+
+file `register.component.html`
+
+```html
+<app-register-user-form (onSubmit)="onSubmit($event)" />
+```
+
+file `register.component.ts`
+
+```typescript
+onSubmit($event: any) {
+    console.log($event);
 }
 ```
