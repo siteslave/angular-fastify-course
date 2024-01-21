@@ -30,7 +30,7 @@
 -   Create `daisyUI` form
 -   Reactive Form/Form Group (Input/Checkbox/Radio/Select)
 -   Form validation
--   Submit/Reset
+-   Submit event
 
 ## Http Service
 
