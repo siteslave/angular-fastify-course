@@ -26,10 +26,10 @@ fastify.get(
 	'/demo',
 	{
 		schema: {
-			querystring: S.object().prop(
-				'name',
-				S.string().minLength(5).required()
-			),
+			querystring: S.object()
+				.prop('name', S.string().minLength(5).required())
+				.prop('limit', S.number().min(10).max(30))
+				.prop('offset', S.number().min(0)),
 		},
 	},
 	async function (request, reply) {
