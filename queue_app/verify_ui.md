@@ -1,86 +1,82 @@
-# Verify UI
+# View UI
 
 file `verify.component.html`
 
 ```html
 <div class="hero min-h-screen bg-base-200">
-	<div class="hero-content text-center">
+	<div class="text-center">
 		<div class="max-w-full">
-			<div class="card w-72 bg-base-100 shadow-xl">
-				<div class="card-body">
-					<h2 class="font-semibold text-2xl">สถิตย์</h2>
-					<p>
-						<span class="font-semibold"> คลินิกโรคเรื้อรัง </span>
-					</p>
+			<form [formGroup]="form" (ngSubmit)="onSubmit()">
+				<div class="card w-72 bg-base-100 shadow-xl">
+					<div class="card-body">
+						<h2 class="card-title">ลงทะเบียน</h2>
 
-					<div>
-						<div class="badge badge-accent">
-							<span class="font-semibold"> คิวที่ 56 </span>
-						</div>
-					</div>
-
-					<div class="divider">คิวรับริการปัจจุบัน</div>
-
-					<div class="space-y-4">
-						<p>
-							<span class="font-semibold text-3xl"> 37 </span>
-						</p>
-						<p>
-							<span class="text-sm"> อัปเดท 13:30:45 น. </span>
-						</p>
-					</div>
-
-					<div class="card-actions">
-						<div class="flex w-full">
-							<div class="flex-grow">
-								<button class="btn btn-primary" routerLink="/verify">
-									คิวอื่น
-								</button>
+						<label class="form-control w-full max-w-xs">
+							<div class="label">
+								<span class="label-text">กรุณาระบุ HN 7 หลัก</span>
 							</div>
-							<div class="flex-grow">
-								<button class="btn btn-secondary">รีเฟรช</button>
+							<input
+								type="text"
+								maxlength="7"
+								placeholder="000344"
+								formControlName="hn"
+								class="input input-bordered w-full max-w-xs"
+							/>
+							<div class="label">
+								<span class="label-text-alt"> </span>
 							</div>
+						</label>
+
+						<div class="card-actions justify-center">
+							<button
+								type="submit"
+								class="btn btn-primary"
+								[disabled]="!form.valid"
+							>
+								ตรวจสอบ
+							</button>
 						</div>
 					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 </div>
 ```
 
-file `view.component.ts`
+file `verify.comonent.ts`
 
 ```typescript
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {
+	FormControl,
+	FormGroup,
+	ReactiveFormsModule,
+	Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
-	selector: 'app-viewer',
+	selector: 'app-verify',
 	standalone: true,
-	imports: [RouterModule],
-	templateUrl: './viewer.component.html',
+	imports: [ReactiveFormsModule],
+	templateUrl: './verify.component.html',
 	styles: ``,
 })
-export class ViewerComponent {
-	timmer: any;
-	ngOnInit() {
-		// Timmer
-		this.timmer = setInterval(() => {
-			this.callApi();
-		}, 5000);
-	}
+export class VerifyComponent {
+	form = new FormGroup({
+		hn: new FormControl('', [
+			Validators.required,
+			Validators.minLength(7),
+			Validators.maxLength(7),
+			Validators.pattern('^[0-9]*$'),
+		]),
+	});
 
-	async callApi() {
-		// Call Api
-		const url = `https://dummyjson.com/users`;
-		const response = await fetch(url);
-		const data = await response.json();
-		console.log(data);
-	}
+	constructor(private router: Router) {}
 
-	ngOnDestroy() {
-		clearInterval(this.timmer);
+	onSubmit() {
+		this.router.navigateByUrl('/viewer');
 	}
 }
 ```
