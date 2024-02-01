@@ -232,11 +232,11 @@ services:
             - web
             - api
 
-    portalweb:
+    web:
         image: myrepro/web
         restart: always
 
-    portalapi:
+    api:
         image: myrepro/api
         restart: always
         volumes:
